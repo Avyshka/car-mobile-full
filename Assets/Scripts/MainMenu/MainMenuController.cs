@@ -28,7 +28,7 @@ namespace Ui
             _profilePlayer = profilePlayer;
             _view = ResourceLoader.LoadAndInstantiateObject<MainMenuView>(new ResourcePath {PathResource = "Prefabs/mainMenu"}, placeForUi, false); 
             AddGameObjects(_view.gameObject);
-            _view.Init(StartGame);
+            _view.Init(StartGame, DailyRewardsGame);
             
             // можно внедрить как зависимость для другого контроллера
             var cursorTrailController = ConfigureCursorTrail();
@@ -79,6 +79,11 @@ namespace Ui
         {
             _profilePlayer.CurrentState.Value = GameState.Game;
             _profilePlayer.AnalyticTools.SendMessage("start_game");
+        }
+
+        private void DailyRewardsGame()
+        {
+            _profilePlayer.CurrentState.Value = GameState.DailyRewards;
         }
 
         #endregion

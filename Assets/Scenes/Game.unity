@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 0983ea49c5831c240922345cc2093549,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +119,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -364,6 +367,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1980575208
 Canvas:
   m_ObjectHideFlags: 0
@@ -418,11 +422,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 1903552}
-  _dailyRewardView: {fileID: 8148925349599847995, guid: af98b2a422006a84baec4b4d43bd5ed3,
+  _dailyRewardView: {fileID: 3555876110707433828, guid: d88da774c6eb93b42b52e627052e681c,
     type: 3}
-  _currencyView: {fileID: 2002978465762907603, guid: 1fa0405703888ed4ebba53b056700930,
+  _currencyView: {fileID: 5567515494019646673, guid: 1009d8a77bef5f243bef1144b1a18a41,
     type: 3}
-  _fightWindowView: {fileID: 1370847392091638373, guid: f333209f503cdcb4f92f741301917204,
+  _startFightView: {fileID: 854345654445096455, guid: fcf199a0a766a4c419271c8394862bdc,
     type: 3}
-  _startFightView: {fileID: 5015404064837169320, guid: fce50c34cb8545f4988c8f439bc95fec,
+  _fightWindowView: {fileID: 2597494737447268994, guid: c74911b7a16e24042a02fa9e73a2a3eb,
     type: 3}

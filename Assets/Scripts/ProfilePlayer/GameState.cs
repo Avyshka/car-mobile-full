@@ -5,7 +5,9 @@ namespace Profile
     {
         None,
         Start,
-        Game
+        Game,
+        DailyRewards,
+        Fight
     }
 }
 

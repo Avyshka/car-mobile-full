@@ -25,6 +25,7 @@ namespace Rewards
         [SerializeField] private SlotRewardContainerView _slotRewardContainerView;
         [SerializeField] private Button _btnGetReward;
         [SerializeField] private Button _btnReset;
+        [SerializeField] private Button _btnClose;
         [SerializeField] private Slider _progressBar;
         
         public float TimeCooldown => _timeCooldown;
@@ -42,6 +43,8 @@ namespace Rewards
         public Button GetRewardButton => _btnGetReward;
   
         public Button ResetButton => _btnReset;
+        
+        public Button CloseButton => _btnClose;
         
         public Slider ProgressBar => _progressBar;
         
@@ -69,12 +72,6 @@ namespace Rewards
                 else
                     PlayerPrefs.DeleteKey(TimeGetRewardKey);
             }
-        }
-
-        private void OnDestroy()
-        {
-            _btnGetReward.onClick.RemoveAllListeners();
-            _btnReset.onClick.RemoveAllListeners();
         }
     }
 }

@@ -1,20 +1,35 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Profile;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Rewards
 {
-    public class DailyRewardController
+    public class DailyRewardController : BaseController
     {
         private readonly DailyRewardView _dailyRewardView;
         private List<SlotRewardContainerView> _slots;
+        private CurrencyController _currencyController;
+        private ProfilePlayer _profilePlayer;
 
         private bool _isGetReward;
 
-        public DailyRewardController(DailyRewardView dailyRewardView)
+        public DailyRewardController(
+            Transform placeForUi,
+            DailyRewardView dailyRewardView,
+            CurrencyView currencyView,
+            ProfilePlayer profilePlayer
+        )
         {
-            _dailyRewardView = dailyRewardView;
+            _profilePlayer = profilePlayer;
+            
+            _dailyRewardView = Object.Instantiate(dailyRewardView, placeForUi);
+            AddGameObjects(_dailyRewardView.gameObject);
+            
+            _currencyController = new CurrencyController(placeForUi, currencyView);
+            AddController(_currencyController);
         }
 
         public void RefreshView()
@@ -88,7 +103,8 @@ namespace Rewards
                         $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
 
                     _dailyRewardView.TimerNewReward.text = $"Time to get the next reward: {timeGetReward}";
-                    _dailyRewardView.ProgressBar.value = 1 - (float)currentClaimCooldown.TotalSeconds / _dailyRewardView.TimeCooldown;
+                    _dailyRewardView.ProgressBar.value =
+                        1 - (float) currentClaimCooldown.TotalSeconds / _dailyRewardView.TimeCooldown;
                 }
             }
 
@@ -102,6 +118,7 @@ namespace Rewards
         {
             _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
             _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
+            _dailyRewardView.CloseButton.onClick.AddListener(CloseWindow);
         }
 
         private void ClaimReward()
@@ -110,7 +127,7 @@ namespace Rewards
             {
                 return;
             }
-            
+
             _slots[_dailyRewardView.CurrentSlotInActive].StopIconAnimation();
 
             var reward = _dailyRewardView.Rewards[_dailyRewardView.CurrentSlotInActive];
@@ -119,13 +136,31 @@ namespace Rewards
             _dailyRewardView.TimeGetReward = DateTime.UtcNow;
             _dailyRewardView.CurrentSlotInActive =
                 (_dailyRewardView.CurrentSlotInActive + 1) % _dailyRewardView.Rewards.Count;
-            
+
             RefreshRewardsState();
         }
 
         private void ResetTimer()
         {
             PlayerPrefs.DeleteAll();
+            CurrencyView.Instance.SetCurrency(RewardType.Food, 0);
+            CurrencyView.Instance.SetCurrency(RewardType.Wood, 0);
+            CurrencyView.Instance.SetCurrency(RewardType.Gold, 0);
+            CurrencyView.Instance.SetCurrency(RewardType.Diamonds, 0);
+        }
+
+        private void CloseWindow()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Start;
+            GameObject.Destroy(_dailyRewardView.gameObject);
+        }
+
+        protected override void OnDispose()
+        {
+            _dailyRewardView.GetRewardButton.onClick.RemoveAllListeners();
+            _dailyRewardView.ResetButton.onClick.RemoveAllListeners();
+            _dailyRewardView.CloseButton.onClick.RemoveAllListeners();
+            base.OnDispose();
         }
     }
 }

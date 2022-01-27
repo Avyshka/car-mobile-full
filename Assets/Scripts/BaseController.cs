@@ -11,42 +11,39 @@ public abstract class BaseController : IDisposable
     
     public void Dispose()
     {
-        if (!_isDisposed)
+        if (_isDisposed) return;
+        
+        _isDisposed = true;
+        if (_baseControllers != null)
         {
-            _isDisposed = true;
-            if (_baseControllers != null)
+            foreach (var baseController in _baseControllers)
             {
-                foreach (BaseController baseController in _baseControllers)
-                {
-                    baseController?.Dispose();
-                }
-                _baseControllers.Clear();
+                baseController?.Dispose();
             }
-
-            if (_gameObjects != null)
-            {
-                foreach (GameObject cachedGameObject in _gameObjects)
-                {
-                    Object.Destroy(cachedGameObject);
-                }
-                _gameObjects.Clear();
-            }
-            
-            OnDispose();
+            _baseControllers.Clear();
         }
+
+        if (_gameObjects != null)
+        {
+            foreach (var cachedGameObject in _gameObjects)
+            {
+                Object.Destroy(cachedGameObject);
+            }
+            _gameObjects.Clear();
+        }
+            
+        OnDispose();
     }
 
     protected void AddController(BaseController baseController)
     {
-        if (_baseControllers == null)
-            _baseControllers = new List<BaseController>();
+        _baseControllers ??= new List<BaseController>();
         _baseControllers.Add(baseController);
     }
 
     protected void AddGameObjects(GameObject gameObject)
     {
-        if (_gameObjects == null)
-            _gameObjects = new List<GameObject>();
+        _gameObjects ??= new List<GameObject>();
         _gameObjects.Add(gameObject);
     }
 

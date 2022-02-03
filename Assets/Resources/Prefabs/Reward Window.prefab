@@ -791,6 +791,10 @@ MonoBehaviour:
   _slotRewardsContainer: {fileID: 3555876112375357742}
   _slotRewardContainerView: {fileID: 4199250447569518736, guid: df4bb50264096aa42a90b7ada1b415a9,
     type: 3}
+  _loadSlotRewardContainer:
+    m_AssetGUID: df4bb50264096aa42a90b7ada1b415a9
+    m_SubObjectName: 
+    m_SubObjectType: 
   _btnGetReward: {fileID: 3555876110556504583}
   _btnReset: {fileID: 3555876110460124223}
   _btnClose: {fileID: 2619515372225190047}

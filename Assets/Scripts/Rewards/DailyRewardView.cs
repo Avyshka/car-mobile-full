@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace Rewards
@@ -23,6 +24,7 @@ namespace Rewards
         
         [SerializeField] private Transform _slotRewardsContainer;
         [SerializeField] private SlotRewardContainerView _slotRewardContainerView;
+        [SerializeField] private AssetReference _loadSlotRewardContainer;
         [SerializeField] private Button _btnGetReward;
         [SerializeField] private Button _btnReset;
         [SerializeField] private Button _btnClose;
@@ -39,6 +41,8 @@ namespace Rewards
         public Transform SlotRewardsContainer => _slotRewardsContainer;
   
         public SlotRewardContainerView SlotRewardViewContainer => _slotRewardContainerView;
+        
+        public AssetReference LoadSlotRewardContainer => _loadSlotRewardContainer;
   
         public Button GetRewardButton => _btnGetReward;
   

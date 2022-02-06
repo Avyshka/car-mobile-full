@@ -1,5 +1,8 @@
 ﻿using Profile;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
 namespace AI
 {
@@ -17,6 +20,8 @@ namespace AI
         private Money _money;
 
         private Enemy _enemy;
+
+        private StringTable _stringTable;
 
         public FightWindowController(Transform placeForUi, FightWindowView fightWindowView, ProfilePlayer profilePlayer)
         {
@@ -37,8 +42,19 @@ namespace AI
             _power.AttachEnemy(_enemy);
             _money.AttachEnemy(_enemy);
 
+            ChangedLocaleEvent(null);
             SubscribeButtons();
         }
+
+        private void ChangedLocaleEvent(Locale locale)
+        {
+            _stringTable = LocalizationSettings.StringDatabase.GetTable("ui");
+            _fightWindowView.CountHealthText.text = _stringTable.GetEntry("playerHealth").Value + _health.Health;
+            _fightWindowView.CountPowerText.text = _stringTable.GetEntry("playerPower").Value + _power.Power;
+            _fightWindowView.CountMoneyText.text = _stringTable.GetEntry("playerMoney").Value + _money.Money;
+            _fightWindowView.CountPowerEnemyText.text = _stringTable.GetEntry("enemyPower").Value + _enemy.Power;
+        }
+
 
         private void SubscribeButtons()
         {
@@ -52,6 +68,8 @@ namespace AI
             _fightWindowView.DecreaseMoneyButton.onClick.AddListener(() => ChangeMoney(false));
 
             _fightWindowView.FightButton.onClick.AddListener(Fight);
+
+            LocalizationSettings.SelectedLocaleChanged += ChangedLocaleEvent;
         }
 
         private void ChangeHealth(bool isAddCount)
@@ -85,22 +103,23 @@ namespace AI
             switch (dataType)
             {
                 case DataType.Health:
-                    _fightWindowView.CountHealthText.text = $@"Player Health {countChangeData}";
+                    _fightWindowView.CountHealthText.text =
+                        _stringTable.GetEntry("playerHealth").Value + countChangeData;
                     _health.Health = countChangeData;
                     break;
 
                 case DataType.Power:
-                    _fightWindowView.CountPowerText.text = $@"Player Power {countChangeData}";
+                    _fightWindowView.CountPowerText.text = _stringTable.GetEntry("playerPower").Value + countChangeData;
                     _power.Power = countChangeData;
                     break;
 
                 case DataType.Money:
-                    _fightWindowView.CountMoneyText.text = $@"Player Money {countChangeData}";
+                    _fightWindowView.CountMoneyText.text = _stringTable.GetEntry("playerMoney").Value + countChangeData;
                     _money.Money = countChangeData;
                     break;
             }
 
-            _fightWindowView.CountPowerEnemyText.text = $@"Enemy Power {_enemy.Power}";
+            _fightWindowView.CountPowerEnemyText.text = _stringTable.GetEntry("enemyPower").Value + _enemy.Power;
         }
 
         protected override void OnDispose()
@@ -119,7 +138,9 @@ namespace AI
             _health.DetachEnemy(_enemy);
             _power.DetachEnemy(_enemy);
             _money.DetachEnemy(_enemy);
-            
+
+            LocalizationSettings.SelectedLocaleChanged -= ChangedLocaleEvent;
+
             base.OnDispose();
         }
     }

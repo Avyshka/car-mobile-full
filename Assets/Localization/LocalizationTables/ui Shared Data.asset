@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ui Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: ui
+  m_TableCollectionNameGuidString: e5df09cf57673f54080da254ee999bfc
+  m_Entries:
+  - m_Id: 45610553344
+    m_Key: startGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 151994880000
+    m_Key: dailyRewards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 185431871488
+    m_Key: exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 299219144704
+    m_Key: rewardsReset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327790743552
+    m_Key: rewardsClose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 352478416896
+    m_Key: rewardsGet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 545126993920
+    m_Key: fight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 835473494016
+    m_Key: healthPlus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 840397606912
+    m_Key: healthMinus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 896538365952
+    m_Key: powerPlus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 898727792640
+    m_Key: powerMinus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 933293051904
+    m_Key: moneyPlus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934052220928
+    m_Key: moneyMinus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 973755502592
+    m_Key: enemyPower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1004977901568
+    m_Key: playerHealth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1006580125696
+    m_Key: playerPower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1007297351680
+    m_Key: playerMoney
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1644170205944

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Profile;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
 namespace Rewards
@@ -11,6 +14,7 @@ namespace Rewards
     {
         private readonly DailyRewardView _dailyRewardView;
         private List<SlotRewardContainerView> _slots;
+        private List<AsyncOperationHandle<GameObject>> _handles;
         private CurrencyController _currencyController;
         private ProfilePlayer _profilePlayer;
 
@@ -32,26 +36,38 @@ namespace Rewards
             AddController(_currencyController);
         }
 
-        public void RefreshView()
+        public async void RefreshView()
         {
-            InitSlots();
+            await InitSlots();
             _dailyRewardView.StartCoroutine(RewardsStateUpdater());
             RefreshUi();
             SubscribeButtons();
         }
 
-        private void InitSlots()
+        private async Task InitSlots()
         {
+            _handles = new List<AsyncOperationHandle<GameObject>>();
             _slots = new List<SlotRewardContainerView>();
             for (var i = 0; i < _dailyRewardView.Rewards.Count; i++)
             {
-                var slot = GameObject.Instantiate(
-                    _dailyRewardView.SlotRewardViewContainer,
+                var handle = Addressables.InstantiateAsync(
+                    _dailyRewardView.LoadSlotRewardContainer,
                     _dailyRewardView.SlotRewardsContainer,
                     false
                 );
-                slot.Show(i * 0.1f + 0.5f);
-                _slots.Add(slot);
+                await handle.Task;
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    var slot = handle.Result.GetComponent<SlotRewardContainerView>();
+                    _slots.Add(slot);
+                    slot.Show(i * 0.1f + 0.5f);
+                }
+                else
+                {
+                    Debug.LogError("Cannot load [SlotRewardContainerView] from the bundle!");
+                }
+                
+                _handles.Add(handle);
             }
         }
 
@@ -160,6 +176,10 @@ namespace Rewards
             _dailyRewardView.GetRewardButton.onClick.RemoveAllListeners();
             _dailyRewardView.ResetButton.onClick.RemoveAllListeners();
             _dailyRewardView.CloseButton.onClick.RemoveAllListeners();
+            
+            foreach (var addressablePrefab in _handles)
+                Addressables.ReleaseInstance(addressablePrefab);
+
             base.OnDispose();
         }
     }

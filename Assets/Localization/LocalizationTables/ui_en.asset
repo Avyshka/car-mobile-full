@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ui_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e5df09cf57673f54080da254ee999bfc, type: 2}
+  m_Metadata:
+    m_Items:
+    - id: 0
+  m_TableData:
+  - m_Id: 45610553344
+    m_Localized: Start game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 151994880000
+    m_Localized: Daily reward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 185431871488
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 299219144704
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327790743552
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 352478416896
+    m_Localized: Get rewards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 545126993920
+    m_Localized: Fight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 835473494016
+    m_Localized: +1 Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 840397606912
+    m_Localized: -1 Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 896538365952
+    m_Localized: +1 Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 898727792640
+    m_Localized: -1 Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 933293051904
+    m_Localized: +1 Money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934052220928
+    m_Localized: -1 Money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 973755502592
+    m_Localized: 'Enemy Power: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1004977901568
+    m_Localized: 'Player Health: '
+    m_Metadata:
+      m_Items:
+      - id: 1
+  - m_Id: 1006580125696
+    m_Localized: 'Player Power: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1007297351680
+    m_Localized: 'Player Money: '
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00d059fde9000000
+    00000001:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00d059fde9000000
